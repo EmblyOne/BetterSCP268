@@ -19,6 +19,7 @@ namespace BetterSCP268
 
         public override void OnEnabled()
         { 
+            if(!Config.IsEnabled) return;
             EventHandler = new EventHandlers(this);
             Player.Hurting += EventHandler.OnHurt268;
             Player.TriggeringTesla += EventHandler.OnTriggeringTesla;
