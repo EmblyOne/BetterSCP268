@@ -18,4 +18,6 @@ BetterSCP268:
   scp096: true
   # The distance between players from which the broadcast will show
   dis: 16
+  # Will Player with SCP-268 be flashed or no?
+  flashed: true
 ```
