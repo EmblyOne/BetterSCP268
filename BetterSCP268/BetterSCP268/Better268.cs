@@ -36,6 +36,7 @@ namespace BetterSCP268
             Player.UsingItem -= EventHandler.OnUsingSCP;
             Player.Hurting -= EventHandler.OnFlashed;
             EventHandler = null;
+            base.OnDisabled();
         }
         
     }
