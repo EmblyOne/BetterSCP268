@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections;
+﻿
 using Exiled.API.Features;
 using Exiled.Events.EventArgs;
 using CustomPlayerEffects;
+using Exiled.API.Features.Items;
 using System.Collections.Generic;
 using MEC;
 using UnityEngine;
+using Exiled.API.Enums;
 
 namespace BetterSCP268
 {
@@ -13,54 +14,40 @@ namespace BetterSCP268
     {
         public Better268 plugin;
         public EventHandlers(Better268 plugin) => this.plugin = plugin;
-
-
-
-
         public void OnHurt268(HurtingEventArgs ev)
         {
-            if (ev.Target.GetEffectActive<CustomPlayerEffects.Invisible>()  && plugin.Config.damage)
-            {
-                ev.IsAllowed = false;
-            }
-        } 
-        public void OnFlashed(HurtingEventArgs ev)
-        {
-            if(ev.Target.GetEffectActive<CustomPlayerEffects.Flashed>() && ev.Target.GetEffectActive<CustomPlayerEffects.Invisible>() && plugin.Config.flashed)
-            {
+            if (ev.Target.GetEffectActive<CustomPlayerEffects.Invisible>() && plugin.Config.damage)
                 ev.IsAllowed = false; 
-            }
-        }
+        } 
         public void OnTriggeringTesla(TriggeringTeslaEventArgs ev)
         {
             if (ev.Player.GetEffectActive<CustomPlayerEffects.Invisible>() && plugin.Config.tesla)
-            {
                 ev.IsTriggerable = false;
-                Log.Debug("Player with SCP-268 didn't trigger by tesla");
-
-            }
-
-        } 
-     
-
+        }
         public void OnUsingSCP(UsingItemEventArgs ev)
         {
-            if (ev.Item.Type == ItemType.SCP268)
-            {
-
-                Timing.RunCoroutine(DetectCoroutine(ev.Player));
-                Log.Debug("DetectCoroutine has activated");
-
-            }
-
+            if (ev.Item.Type == ItemType.SCP330)
+                Timing.RunCoroutine(DetectCoroutine(ev.Player), "BetterSCP268Coroutine");  
         }
         public void OnAddingTarget(AddingTargetEventArgs ev)
         {
             if (ev.Target.GetEffectActive<CustomPlayerEffects.Invisible>() && plugin.Config.scp096)
-            {
                 ev.IsAllowed = false;
-                Log.Debug("Player with SCP-268 didn't add to the SCP-096 Target");
-            }
+        }
+      
+        public void OnDamage(HurtingEventArgs ev)
+        {
+            if (plugin.Config.falldown)
+                return;
+            switch (ev.Handler.Type)
+            {
+                case DamageType.Falldown:
+                    ev.IsAllowed = plugin.Config.falldown;
+                    return;
+                case DamageType.Hypothermia:
+                    ev.IsAllowed = plugin.Config.scp244;
+                    return; 
+           }
         }
         public IEnumerator<float> DetectCoroutine(Player player1)
         {
@@ -73,17 +60,16 @@ namespace BetterSCP268
                     if (player == player1) continue;
                     if (Vector3.Distance(player.Position, player1.Position) <= plugin.Config.dis)
                     {
-                        player.Broadcast((ushort)plugin.Config.bctime, plugin.Config.bc, 0);
-                        yield break;
+                        player.Broadcast((ushort)plugin.Config.bctime, plugin.Config.bc);
+                        yield break; 
                     }
 
                 }
             }
-
-
+        } 
+        public void OnRoundRestart()
+        {
+            Timing.KillCoroutines("BetterSCP268Coroutine");
         }
-       
-
-
     }
 }
