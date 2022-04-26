@@ -12,7 +12,7 @@ namespace BetterSCP268
         public override string Author { get; } = "G-Man";
         public override string Name { get; } = "BetterSCP268";
         public override string Prefix { get; } = "BetterSCP268";
-        public override Version Version { get; } = new Version(2,0,0);
+        public override Version Version { get; } = new Version(3,0,0);
         public override Version RequiredExiledVersion { get; } = new Version(5, 1, 3);
         public EventHandlers EventHandler; 
         public override void OnEnabled()
