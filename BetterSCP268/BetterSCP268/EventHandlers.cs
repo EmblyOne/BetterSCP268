@@ -37,8 +37,6 @@ namespace BetterSCP268
       
         public void OnDamage(HurtingEventArgs ev)
         {
-            if (plugin.Config.falldown)
-                return;
             switch (ev.Handler.Type)
             {
                 case DamageType.Falldown:
