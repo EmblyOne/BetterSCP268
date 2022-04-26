@@ -26,9 +26,6 @@ namespace BetterSCP268
         [Description("The distance between players from which the broadcast will show")]
         public int dis { get; set; } = 16; 
 
-        [Description("It will turn on door patch for SCP-268(you can open doors if you are SCP-268 and stay invisible)")]
-        public bool doorpatch { get; set; } = true; 
-
         [Description("You won't get damage when you will fall with SCP-268(false = you won't get damage, true = you will get)")]
         public bool falldown { get; set; } = false;
 
