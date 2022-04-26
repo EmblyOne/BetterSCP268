@@ -31,7 +31,8 @@ namespace BetterSCP268
             Player.TriggeringTesla -= EventHandler.OnTriggeringTesla;
             Scp096.AddingTarget -= EventHandler.OnAddingTarget;
             Player.UsingItem -= EventHandler.OnUsingSCP;
-            EventHandler = null; 
+            EventHandler = null;
+            base.OnDisabled();
         }
     }
 }
