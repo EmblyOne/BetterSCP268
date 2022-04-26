@@ -37,15 +37,19 @@ namespace BetterSCP268
       
         public void OnDamage(HurtingEventArgs ev)
         {
-            switch (ev.Handler.Type)
+            if (ev.Target.GetEffectActive<CustomPlayerEffects.Invisible>())  
             {
-                case DamageType.Falldown:
-                    ev.IsAllowed = plugin.Config.falldown;
-                    return;
-                case DamageType.Hypothermia:
-                    ev.IsAllowed = plugin.Config.scp244;
-                    return; 
-           }
+                switch (ev.Handler.Type)
+                {
+                    case DamageType.Falldown:
+                        ev.IsAllowed = plugin.Config.falldown;
+                        return;
+                    case DamageType.Hypothermia:
+                        ev.IsAllowed = plugin.Config.scp244;
+                        return;
+
+                }
+            }
         }
         public IEnumerator<float> DetectCoroutine(Player player1)
         {
