@@ -26,7 +26,7 @@ namespace BetterSCP268
         }
         public void OnUsingSCP(UsingItemEventArgs ev)
         {
-            if (ev.Item.Type == ItemType.SCP330)
+            if (ev.Item.Type == ItemType.SCP268)
                 Timing.RunCoroutine(DetectCoroutine(ev.Player), "BetterSCP268Coroutine");  
         }
         public void OnAddingTarget(AddingTargetEventArgs ev)
