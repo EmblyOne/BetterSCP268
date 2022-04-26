@@ -15,10 +15,11 @@ namespace BetterSCP268
         public override Version Version { get; } = new Version(2,0,0);
         public override Version RequiredExiledVersion { get; } = new Version(5, 1, 3);
         public EventHandlers EventHandler;
-        public Better268 plugin;
-        public Harmony harmony; 
+        public Better268 plugin; 
+        public Harmony harmony = new Harmony("InteractSCP268Patch"); 
         public override void OnEnabled()
-        { 
+        {
+            plugin = new Better268();
             EventHandler = new EventHandlers(this); 
             if(plugin.Config.doorpatch)
             {
@@ -33,7 +34,7 @@ namespace BetterSCP268
 
         public override void OnDisabled()
         {
-            harmony.UnpatchAll();
+            harmony.UnpatchAll("InteractSCP268Patch");
             Player.Hurting -= EventHandler.OnHurt268;
             Player.TriggeringTesla -= EventHandler.OnTriggeringTesla;
             Scp096.AddingTarget -= EventHandler.OnAddingTarget;
