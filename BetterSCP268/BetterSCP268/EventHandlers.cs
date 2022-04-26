@@ -16,12 +16,12 @@ namespace BetterSCP268
         public EventHandlers(Better268 plugin) => this.plugin = plugin;
         public void OnHurt268(HurtingEventArgs ev)
         {
-            if (ev.Target.GetEffectActive<Invisible>() && plugin.Config.damage)
+            if (ev.Target.GetEffectActive<Invisible>() && plugin.Config.Damage)
                 ev.IsAllowed = false; 
         } 
         public void OnTriggeringTesla(TriggeringTeslaEventArgs ev)
         {
-            if (ev.Player.GetEffectActive<Invisible>() && plugin.Config.tesla)
+            if (ev.Player.GetEffectActive<Invisible>() && plugin.Config.Tesla)
                 ev.IsTriggerable = false;
         }
         public void OnUsingSCP(UsingItemEventArgs ev)
@@ -31,7 +31,7 @@ namespace BetterSCP268
         }
         public void OnAddingTarget(AddingTargetEventArgs ev)
         {
-            if (ev.Target.GetEffectActive<Invisible>() && plugin.Config.scp096)
+            if (ev.Target.GetEffectActive<Invisible>() && plugin.Config.SCP096)
                 ev.IsAllowed = false;
         }
       
@@ -42,16 +42,16 @@ namespace BetterSCP268
                 switch (ev.Handler.Type)
                 {
                     case DamageType.Falldown:
-                        ev.IsAllowed = plugin.Config.falldown;
+                        ev.IsAllowed = plugin.Config.Falldown;
                         return;
                     case DamageType.Hypothermia:
-                        ev.IsAllowed = plugin.Config.scp244;
+                        ev.IsAllowed = plugin.Config.SCP244;
                         return;
 
                 }
             }
         }
-        public IEnumerator<float> DetectCoroutine(Player player1)
+        public IEnumerator<float> DetectCoroutine(Player Scp330Player)
         {
             for (; ; )
             {
@@ -59,10 +59,10 @@ namespace BetterSCP268
                 yield return Timing.WaitForSeconds(1);
                 foreach (Player player in Player.List)
                 {
-                    if (player == player1) continue;
-                    if (Vector3.Distance(player.Position, player1.Position) <= plugin.Config.dis)
+                    if (player == Scp330Player) continue;
+                    if (Vector3.Distance(player.Position, Scp330Player.Position) <= plugin.Config.Distance)
                     {
-                        player.Broadcast((ushort)plugin.Config.bctime, plugin.Config.bc);
+                        player.Broadcast((ushort)plugin.Config.BroadcastTime, plugin.Config.Broadcast);
                         yield break; 
                     }
 
