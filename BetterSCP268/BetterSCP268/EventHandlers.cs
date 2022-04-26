@@ -16,12 +16,12 @@ namespace BetterSCP268
         public EventHandlers(Better268 plugin) => this.plugin = plugin;
         public void OnHurt268(HurtingEventArgs ev)
         {
-            if (ev.Target.GetEffectActive<CustomPlayerEffects.Invisible>() && plugin.Config.damage)
+            if (ev.Target.GetEffectActive<Invisible>() && plugin.Config.damage)
                 ev.IsAllowed = false; 
         } 
         public void OnTriggeringTesla(TriggeringTeslaEventArgs ev)
         {
-            if (ev.Player.GetEffectActive<CustomPlayerEffects.Invisible>() && plugin.Config.tesla)
+            if (ev.Player.GetEffectActive<Invisible>() && plugin.Config.tesla)
                 ev.IsTriggerable = false;
         }
         public void OnUsingSCP(UsingItemEventArgs ev)
@@ -31,13 +31,13 @@ namespace BetterSCP268
         }
         public void OnAddingTarget(AddingTargetEventArgs ev)
         {
-            if (ev.Target.GetEffectActive<CustomPlayerEffects.Invisible>() && plugin.Config.scp096)
+            if (ev.Target.GetEffectActive<Invisible>() && plugin.Config.scp096)
                 ev.IsAllowed = false;
         }
       
         public void OnDamage(HurtingEventArgs ev)
         {
-            if (ev.Target.GetEffectActive<CustomPlayerEffects.Invisible>())  
+            if (ev.Target.GetEffectActive<Invisible>())  
             {
                 switch (ev.Handler.Type)
                 {

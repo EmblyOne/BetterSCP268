@@ -1,7 +1,5 @@
 ﻿using System;
 using Exiled.API.Features;
-using Exiled.API.Interfaces;
-using HarmonyLib;
 using Player = Exiled.Events.Handlers.Player;
 using Scp096 = Exiled.Events.Handlers.Scp096; 
 

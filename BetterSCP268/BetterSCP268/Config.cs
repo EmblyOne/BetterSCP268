@@ -1,4 +1,4 @@
-﻿using Exiled.API.Features;
+﻿
 using System.ComponentModel;
 using Exiled.API.Interfaces;
 namespace BetterSCP268
