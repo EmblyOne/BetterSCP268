@@ -12,6 +12,7 @@ namespace BetterSCP268
 {
     public class EventHandlers
     {
+        public Dictionary<Player, CoroutineHandle> playerhandlelist = new Dictionary<Player, CoroutineHandle>();
         public Better268 plugin;
         public EventHandlers(Better268 plugin) => this.plugin = plugin;
         public void OnHurt268(HurtingEventArgs ev)
@@ -26,8 +27,9 @@ namespace BetterSCP268
         }
         public void OnUsingSCP(UsingItemEventArgs ev)
         {
-            if (ev.Item.Type == ItemType.SCP268)
-                Timing.RunCoroutine(DetectCoroutine(ev.Player), "BetterSCP268Coroutine");  
+            if (!playerhandlelist.ContainsKey(ev.Player) && ev.Item.Type == ItemType.SCP268)  
+               playerhandlelist.Add(ev.Player, Timing.RunCoroutine(DetectCoroutine(ev.Player)));
+            
         }
         public void OnAddingTarget(AddingTargetEventArgs ev)
         {
@@ -55,23 +57,30 @@ namespace BetterSCP268
         {
             for (; ; )
             {
-
-                yield return Timing.WaitForSeconds(1);
                 foreach (Player player in Player.List)
                 {
                     if (player == Scp330Player) continue;
                     if (Vector3.Distance(player.Position, Scp330Player.Position) <= plugin.Config.Distance)
                     {
-                        player.Broadcast((ushort)plugin.Config.BroadcastTime, plugin.Config.Broadcast);
-                        yield break; 
-                    }
-
+                        player.Broadcast(plugin.Config.BroadcastTime, plugin.Config.Broadcast); 
+                    } 
                 }
+                if (!Scp330Player.GetEffectActive<Invisible>())
+                {
+                    Timing.KillCoroutines(playerhandlelist[Scp330Player]);
+                    playerhandlelist.Remove(Scp330Player);
+                }
+                yield return Timing.WaitForSeconds(1);
             }
         } 
         public void OnRoundEnd(EndingRoundEventArgs ev)
         {
-            Timing.KillCoroutines("BetterSCP268Coroutine");
-        }
+            foreach (var item in playerhandlelist)
+            {
+                Timing.KillCoroutines(item.Value);
+            } 
+            playerhandlelist.Clear();
+        } 
+        
     }
 }

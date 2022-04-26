@@ -15,7 +15,7 @@ namespace BetterSCP268
         public string Broadcast { get; set; } = "<b>A player with <color=#4fd411>SCP-268</color> next to you </b>";
 
         [Description("How long will show broadcast")]
-        public int BroadcastTime { get; set; } = 10;
+        public ushort BroadcastTime { get; set; } = 10;
 
         [Description("Tesla will be disabled if SCP-268 goes through the tesla")]  
         public bool Tesla { get; set; } = true;
