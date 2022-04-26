@@ -69,7 +69,7 @@ namespace BetterSCP268
                 }
             }
         } 
-        public void OnRoundRestart()
+        public void OnRoundEnd(EndingRoundEventArgs ev)
         {
             Timing.KillCoroutines("BetterSCP268Coroutine");
         }
