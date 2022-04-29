@@ -15,14 +15,15 @@ namespace BetterSCP268
         public Dictionary<Player, CoroutineHandle> playerhandlelist = new Dictionary<Player, CoroutineHandle>();
         public Better268 plugin;
         public EventHandlers(Better268 plugin) => this.plugin = plugin;
+         
         public void OnHurt268(HurtingEventArgs ev)
         {
-            if (ev.Target.GetEffectActive<Invisible>() && plugin.Config.Damage)
+            if (ev.Target.GetEffectActive<Invisible>() && plugin.Config.CanDamage)
                 ev.IsAllowed = false; 
         } 
         public void OnTriggeringTesla(TriggeringTeslaEventArgs ev)
         {
-            if (ev.Player.GetEffectActive<Invisible>() && plugin.Config.Tesla)
+            if (ev.Player.GetEffectActive<Invisible>() && plugin.Config.DiableTesla)
                 ev.IsTriggerable = false;
         }
         public void OnUsingSCP(UsingItemEventArgs ev)
@@ -33,10 +34,9 @@ namespace BetterSCP268
         }
         public void OnAddingTarget(AddingTargetEventArgs ev)
         {
-            if (ev.Target.GetEffectActive<Invisible>() && plugin.Config.SCP096)
+            if (ev.Target.GetEffectActive<Invisible>() && plugin.Config.SCP096Trigger)
                 ev.IsAllowed = false;
         }
-      
         public void OnDamage(HurtingEventArgs ev)
         {
             if (ev.Target.GetEffectActive<Invisible>())  
@@ -44,10 +44,10 @@ namespace BetterSCP268
                 switch (ev.Handler.Type)
                 {
                     case DamageType.Falldown:
-                        ev.IsAllowed = plugin.Config.Falldown;
+                        ev.IsAllowed = plugin.Config.CanFalldown;
                         return;
                     case DamageType.Hypothermia:
-                        ev.IsAllowed = plugin.Config.SCP244;
+                        ev.IsAllowed = plugin.Config.DisableSCP244Damage;
                         return;
 
                 }
@@ -60,10 +60,9 @@ namespace BetterSCP268
                 foreach (Player player in Player.List)
                 {
                     if (player == Scp330Player) continue;
-                    if (Vector3.Distance(player.Position, Scp330Player.Position) <= plugin.Config.Distance)
-                    {
-                        player.Broadcast(plugin.Config.BroadcastTime, plugin.Config.Broadcast); 
-                    } 
+                    if (Vector3.Distance(player.Position, Scp330Player.Position) <= plugin.Config.Scp330Distance) 
+                        player.Broadcast(plugin.Config.BroadcastTime, plugin.Config.SendBroadcast); 
+
                 }
                 if (!Scp330Player.GetEffectActive<Invisible>())
                 {
@@ -81,6 +80,5 @@ namespace BetterSCP268
             } 
             playerhandlelist.Clear();
         } 
-        
     }
 }

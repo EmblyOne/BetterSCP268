@@ -11,9 +11,9 @@ namespace BetterSCP268
         public override string Name { get; } = "BetterSCP268";
         public override string Prefix { get; } = "BetterSCP268";
         public override Version Version { get; } = new Version(3,0,0);
-        public override Version RequiredExiledVersion { get; } = new Version(5, 1, 3);
+        public override Version RequiredExiledVersion { get; } = new Version(5, 2, 0);
         public EventHandlers EventHandler; 
-        public override void OnEnabled()
+        public void OnEnabled()
         {
             EventHandler = new EventHandlers(this); 
             Player.Hurting += EventHandler.OnHurt268;
@@ -24,7 +24,7 @@ namespace BetterSCP268
             base.OnEnabled();
         }
 
-        public override void OnDisabled()
+        public void OnDisabled()
         {
             Player.Hurting -= EventHandler.OnHurt268;
             Round.EndingRound -= EventHandler.OnRoundEnd;
