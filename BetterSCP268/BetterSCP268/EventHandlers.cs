@@ -61,7 +61,7 @@ namespace BetterSCP268
                 {
                     if (player == Scp330Player) continue;
                     if (Vector3.Distance(player.Position, Scp330Player.Position) <= plugin.Config.Scp330Distance) 
-                        player.Broadcast(2, plugin.Config.SendBroadcast); 
+                        player.Broadcast(plugin.Config.broadcastDelay), plugin.Config.SendBroadcast); 
 
                 }
                 if (!Scp330Player.GetEffectActive<Invisible>())
