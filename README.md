@@ -10,8 +10,6 @@ BetterSCP268:
   can_damage: true
   # it will show broadcast to the player if there is a player next to SCP-268
   send_broadcast: <b>A player with <color=#4fd411>SCP-268</color> next to you </b>
-  # How long will show broadcast
-  broadcast_time: 10
   # Tesla will be disabled if SCP-268 goes through the tesla
   diable_tesla: true
   # SCP-096 can't see if player uses SCP-268
