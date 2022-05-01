@@ -61,7 +61,7 @@ namespace BetterSCP268
                 {
                     if (player == Scp330Player) continue;
                     if (Vector3.Distance(player.Position, Scp330Player.Position) <= plugin.Config.Scp330Distance) 
-                        player.Broadcast(plugin.Config.BroadcastTime, plugin.Config.SendBroadcast); 
+                        player.Broadcast(2, plugin.Config.SendBroadcast); 
 
                 }
                 if (!Scp330Player.GetEffectActive<Invisible>())
@@ -69,7 +69,7 @@ namespace BetterSCP268
                     Timing.KillCoroutines(playerhandlelist[Scp330Player]);
                     playerhandlelist.Remove(Scp330Player);
                 }
-                yield return Timing.WaitForSeconds(1);
+                yield return Timing.WaitForSeconds(2);
             }
         } 
         public void OnRoundEnd(EndingRoundEventArgs ev)
