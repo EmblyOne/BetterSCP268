@@ -14,6 +14,9 @@ namespace BetterSCP268
         [Description("it will show broadcast to the player if there is a player next to SCP-268")]
         public string SendBroadcast { get; set; } = "<b>A player with <color=#4fd411>SCP-268</color> next to you </b>";
 
+        [Description("Time the loop waits before loopig again, increase for more performance, but less accurate position broadcasts")]
+        public ushort broadcastDelay { get; set; } = 1;
+
         [Description("Tesla will be disabled if SCP-268 goes through the tesla")]  
         public bool DiableTesla { get; set; } = true;
 
