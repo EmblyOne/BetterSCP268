@@ -21,7 +21,10 @@ namespace BetterSCP268
         public bool SCP096Trigger { get; set; } = true;
 
         [Description("The distance between players from which the broadcast will show")]
-        public int Scp330Distance { get; set; } = 16; 
+        public int Scp330Distance { get; set; } = 16;
+
+        [Description("Time the loop waits before loopig again, increase for more performance, but less accurate position broadcasts")]
+        public ushort broadcastDelay { get; set; } = 1;  
 
         [Description("You won't get damage when you will fall with SCP-268(false = you won't get damage, true = you will get)")]
         public bool CanFalldown { get; set; } = false;
