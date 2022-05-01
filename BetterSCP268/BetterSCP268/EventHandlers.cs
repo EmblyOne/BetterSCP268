@@ -69,7 +69,7 @@ namespace BetterSCP268
                     Timing.KillCoroutines(playerhandlelist[Scp330Player]);
                     playerhandlelist.Remove(Scp330Player);
                 }
-                yield return Timing.WaitForSeconds(2);
+                yield return Timing.WaitForSeconds(plugin.Config.broadcastDelay);
             }
         } 
         public void OnRoundEnd(EndingRoundEventArgs ev)
