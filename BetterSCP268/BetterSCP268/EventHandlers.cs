@@ -58,7 +58,7 @@ namespace BetterSCP268
         }
         public IEnumerator<float> DetectCoroutine(Player Scp330Player)
         {
-            for (; ; )
+            for (; ;)
             {
                 foreach (Player player in Player.List)
                 {

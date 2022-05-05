@@ -13,7 +13,7 @@ namespace BetterSCP268
         public override Version Version { get; } = new Version(3,0,0);
         public override Version RequiredExiledVersion { get; } = new Version(5, 2, 0);
         public EventHandlers EventHandler; 
-        public void OnEnabled()
+        public override void OnEnabled()
         {
             EventHandler = new EventHandlers(this); 
             Player.Hurting += EventHandler.OnHurt268;
@@ -24,7 +24,7 @@ namespace BetterSCP268
             base.OnEnabled();
         }
 
-        public void OnDisabled()
+        public override void OnDisabled()
         {
             Player.Hurting -= EventHandler.OnHurt268;
             Round.EndingRound -= EventHandler.OnRoundEnd;
