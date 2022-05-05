@@ -15,26 +15,29 @@ namespace BetterSCP268
         public Dictionary<Player, CoroutineHandle> playerhandlelist = new Dictionary<Player, CoroutineHandle>();
         public Better268 plugin;
         public EventHandlers(Better268 plugin) => this.plugin = plugin;
-         
+        
         public void OnHurt268(HurtingEventArgs ev)
         {
-            if (ev.Target.GetEffectActive<Invisible>() && plugin.Config.CanDamage)
+            if (plugin.Config.CanDamage && ev.Target.GetEffectActive<Invisible>())
                 ev.IsAllowed = false; 
-        } 
+        }  
+
         public void OnTriggeringTesla(TriggeringTeslaEventArgs ev)
         {
-            if (ev.Player.GetEffectActive<Invisible>() && plugin.Config.DiableTesla)
+            if (plugin.Config.DiableTesla && ev.Player.GetEffectActive<Invisible>())
                 ev.IsTriggerable = false;
-        }
+        } 
+
         public void OnUsingSCP(UsingItemEventArgs ev)
         {
             if (!playerhandlelist.ContainsKey(ev.Player) && ev.Item.Type == ItemType.SCP268)  
                playerhandlelist.Add(ev.Player, Timing.RunCoroutine(DetectCoroutine(ev.Player)));
             
-        }
+        } 
+
         public void OnAddingTarget(AddingTargetEventArgs ev)
         {
-            if (ev.Target.GetEffectActive<Invisible>() && plugin.Config.SCP096Trigger)
+            if (plugin.Config.SCP096Trigger && ev.Target.GetEffectActive<Invisible>())
                 ev.IsAllowed = false;
         }
         public void OnDamage(HurtingEventArgs ev)
